@@ -38,6 +38,9 @@
 #    else it's a tie
 
 
+import numpy as np
+
+
 class Game:
 
     def __init__(self):
@@ -75,68 +78,49 @@ class Game:
     def check_win(self):
         # check each row for win condition
         for row in self.board:
-            if None in row:
-                return
-            else:
-                if sum(row) == 0:
-                    self.winner = 0
-                    self.win = True
-                    return
-                elif sum(row) == 3:
-                    self.winner = 1
-                    self.win = True
-                    return
-
-        # iterating through the rows
-        for i in range(len(self.board)):
-            col_sum = 0
-            # iterating through the columns
-            for j in range(len(self.board[i])):
-                if self.board[j][i] is not None:
-                    col_sum += self.board[j][i]
-                else:
-                    col_sum -= 1
-
-            # check if players won by column
-            if col_sum == 0:
+            if row.count(0) == 3:
                 self.winner = 0
                 self.win = True
                 return
-            elif col_sum == 3:
+            elif row.count(1) == 3:
+                self.winner = 1
+                self.win = True
+                return
+
+        # convert to numpy array to transpose
+        temp_board = np.array(self.board)
+        temp_board = temp_board.transpose()
+
+        # iterating through the rows
+        for col in temp_board:
+            if np.count_nonzero(col == 0) == 3:
+                self.winner = 0
+                self.win = True
+                return
+            elif np.count_nonzero(col == 1) == 3:
                 self.winner = 1
                 self.win = True
                 return
 
         # check for win condition in main diagonal
-        diag_sum = 0
-        for i in range(len(self.board)):
-            # iterate through both rows and columns
-            if self.board[i][i] is not None:
-                diag_sum += self.board[i][i]
-            else:
-                diag_sum -= 1
-        if diag_sum == 0:
+        main_diagonal = [self.board[i][i] for i in range(len(self.board))]
+        if main_diagonal.count(0) == 3:
             self.winner = 0
             self.win = True
             return
-        elif diag_sum == 3:
-            self.winner = 1
+        elif main_diagonal.count(1) == 3:
+            self.winner = 0
             self.win = True
             return
 
-        # check for alternate diagonal
-        alt_sum = 0
-        for i in range(len(self.board)):
-            if self.board[i][len(self.board) - 1 - i] is not None:
-                alt_sum += self.board[i][len(self.board) - 1 - i]
-            else:
-                diag_sum -= 1
-        if alt_sum == 0:
+        # check for win condition in alt diagonal
+        alt_diagonal = [self.board[i][len(self.board) - 1 - i] for i in range(len(self.board))]
+        if alt_diagonal.count(0) == 3:
             self.winner = 0
             self.win = True
             return
-        elif alt_sum == 3:
-            self.winner = 1
+        elif alt_diagonal.count(0) == 3:
+            self.winner = 0
             self.win = True
             return
 
