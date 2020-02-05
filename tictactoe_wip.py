@@ -41,14 +41,14 @@
 class Game:
 
     def __init__(self):
-        self.board = [[None] * 3] * 3
+        self.board = [[None for i in range(3)] for j in range(3)]
         self.player = 0
         self.win = False
         self.moves_remaining = 9
         self.winner = -1
 
     def resetBoard(self):
-        self.board = [[None] * 3] * 3
+        self.board = [[None for i in range(3)] for j in range(3)]
 
     def playGame(self):
 
@@ -76,7 +76,7 @@ class Game:
         # check each row for win condition
         for row in self.board:
             if None in row:
-                break
+                return
             else:
                 if sum(row) == 0:
                     self.winner = 0
@@ -150,8 +150,8 @@ class Game:
         y = int(input("Player %d enter column: " % self.player))
         # keep reprompting until move is valid
         while not self.validate_move((x, y)):
-            move = input("Player %d enter coordinates for move as tuple (x,y)" % self.player)
-
+            x = int(input("Player %d enter row: " % self.player))
+            y = int(input("Player %d enter column: " % self.player))
         # set move on board
         self.board[x][y] = self.player
         self.moves_remaining -= 1
