@@ -1,0 +1,78 @@
+#
+# Homework 02 - Frequency Count
+#
+# Utilize the frequency count pattern to solve these problems.  Use a Hash Set
+# or an Array instead of a Hash Table where applicable.
+
+
+# 1. Unique
+
+# Given an array of integers, return an array with all duplicates removed.*
+
+# Parameters
+# Input: arr {Array of Integers}
+# Output: {Array of Integers}
+
+# Constraints
+# Time: O(N)
+# Space: O(N)
+
+# Examples
+# [1, 2, 4, 4, 5, 6] --> [1, 2, 4, 5, 6]
+# [1, 1, 2, 2, 3, 3] --> [1, 2, 3]
+# [1, 2, 3, 1, 2] --> [1, 2, 3]
+
+
+def unique(arr):
+    # YOUR WORK HERE
+    present = []
+    for i in arr:
+        if i not in present:
+            present.append(i)
+
+    return present
+# 2. Word Count
+
+# Given an body of text, return a hash table of the frequency of each word.
+
+# Parameters
+# Input: text {String}
+# Output: {Hash Table}
+
+# Constraints
+# Capital and lower case versions of the same word should be counted is the same word.
+# Remove punctuations from all words.
+# Time: O(N)
+# Space: O(N)
+# Where N is the number of characters in the string.
+
+# Examples
+# 'The cat and the hat.' --> '{ the: 2, cat: 1, and: 1, hat: 1 }'`
+# 'As soon as possible.' --> '{ as: 2, soon: 1, possible: 1 }'`
+# 'It's a man, it's a plane, it's superman!' --> '{ its: 3, a: 2, man: 1, plane: 1, superman: 1 }'`
+import string
+def word_count(sentence):
+    # YOUR WORK HERE
+    #print(sentence)
+    sentence = sentence.lower()
+    #print(sentence)
+    words = sentence.split()
+    #print(words)
+    strip = str.maketrans('','',string.punctuation)
+    words = [w.translate(strip) for w in words]
+
+    word_dictionary = {}
+    i = 0
+    while words:
+        #word_dictionary = sentence.maketrans(string.punctuation, ' ' * len(string.punctuation))
+        #print(words)
+        #print(word_dictionary)
+        word = words.pop(0)
+        if word in word_dictionary:
+            word_dictionary[word] += 1
+        else:
+            word_dictionary[word] = 1
+            
+    #print(words)
+    #print(word_dictionary)
+    return word_dictionary
