@@ -75,7 +75,9 @@ class Game:
     def check_win(self):
         # check each row for win condition
         for row in self.board:
-            if None not in row:
+            if None in row:
+                break
+            else:
                 if sum(row) == 0:
                     self.winner = 0
                     self.win = True
@@ -92,6 +94,8 @@ class Game:
             for j in range(len(self.board[i])):
                 if self.board[j][i] is not None:
                     col_sum += self.board[j][i]
+                else:
+                    col_sum -= 1
 
             # check if players won by column
             if col_sum == 0:
@@ -109,6 +113,8 @@ class Game:
             # iterate through both rows and columns
             if self.board[i][i] is not None:
                 diag_sum += self.board[i][i]
+            else:
+                diag_sum -= 1
         if diag_sum == 0:
             self.winner = 0
             self.win = True
@@ -123,6 +129,8 @@ class Game:
         for i in range(len(self.board)):
             if self.board[i][len(self.board) - 1 - i] is not None:
                 alt_sum += self.board[i][len(self.board) - 1 - i]
+            else:
+                diag_sum -= 1
         if alt_sum == 0:
             self.winner = 0
             self.win = True
@@ -138,14 +146,13 @@ class Game:
 
     def prompt_input(self):
         # prompt player for input
-        move = input("Player %d enter coordinates for move as tuple (x,y)" % self.player)
-
+        x = int(input("Player %d enter row: " % self.player))
+        y = int(input("Player %d enter column: " % self.player))
         # keep reprompting until move is valid
-        while not self.validate_move(move):
+        while not self.validate_move((x, y)):
             move = input("Player %d enter coordinates for move as tuple (x,y)" % self.player)
 
         # set move on board
-        x, y = move
         self.board[x][y] = self.player
         self.moves_remaining -= 1
 
@@ -156,7 +163,7 @@ class Game:
         # are inputs from player within bounds of array?
         while valid_input == False and empty_space == False:
             for int in move:
-                if 0 <= int and 2 >= int:
+                if (0 <= int) and (2 >= int):
                     valid_input = True
                 else:
                     print("You entered an invalid coordinate")
