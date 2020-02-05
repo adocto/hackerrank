@@ -1,0 +1,32 @@
+#Recursion function
+#def robotPaths(matrix):
+def robotPaths(matrix):
+  paths = 0
+  start = [0,0]
+  target = [len(matrix[0])-1,len(matrix)-1]
+  xMin = 0
+  yMin = 0
+  xMax = len(matrix[0])
+  yMax = len(matrix)
+  visited = set()
+    # Write your code here
+  def _robot(curN, visited):
+      #check node exists not visited and not final destination
+      if curN[0]<=xMax and curN[1]<=yMax and xMin <= curN[0] and yMin <= curN[1] and curN not in visited and curN != target:
+        return
+      paths+=1
+      visited.add(curN)
+      print(curN)
+      _robot([curN[0],curN[1]-1], visited)
+      #call robot to go down
+      _robot([curN[0],curN[1]+1], visited)
+      #call robot to go right
+      _robot([curN[0]+1,curN[1]], visited)
+      #call robot to go left
+      _robot([curN[0]-1,curN[1]], visited)
+  _robot([0,0], visited)
+  return paths
+
+if __name__ == "__main__":
+  matrix = [[0,0,0],[0,0,0]]
+  robotPaths(matrix)
