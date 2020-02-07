@@ -1,0 +1,37 @@
+print("Hello")
+
+class spiral(arr):
+  direction = right
+  location = arr[0][0]
+  xmin = 0
+  ymin = 0
+  xmax = len(arr[0])-1
+  ymax = len(arr)-1
+  visited = []
+  
+  def move(direction,location):
+    if direction == right:
+      location[] += 1
+    elif direction == down:
+      location[0] += 1
+    elif direction == left:
+      location[] += -1
+    else:
+      location[0] += -1
+    return location
+
+
+#visited array
+
+#while goal = false
+# while next = valid
+#   check if next direction node exists/is visited
+#   if valid add to visited and move
+#     if not valid rotate
+  #     if direction == left:
+  #         direction = down etc.
+  #           if not valid return visited array
+    #           return visited
+if __name__=="__main__":
+  spiral([[1,2,3],[4,5,6],[7,8,9]])
+
