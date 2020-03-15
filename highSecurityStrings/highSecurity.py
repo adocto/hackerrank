@@ -17,11 +17,12 @@ import sys
 
 def getStrength(password, weight_a):
     # Complete the function
-    ordDiff = (ord(password[0]) - weight_a)
-
+    ordDiff = (ord('a') - weight_a)
+    n = 0
     strength = 0
     for n in range (len(password)):
-        strength += ((ord(password[n]) - ordDiff)%25)
+        strength += ((ord(password[n]) - ordDiff)%26)
+        print(strength)
     return strength
 
 if __name__ == '__main__':
