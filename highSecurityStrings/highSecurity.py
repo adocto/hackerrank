@@ -17,6 +17,12 @@ import sys
 
 def getStrength(password, weight_a):
     # Complete the function
+    ordDiff = (ord(password[0]) - weight_a)
+
+    strength = 0
+    for n in range (len(password)):
+        strength += ((ord(password[n]) - ordDiff)%25)
+    return strength
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
