@@ -22,8 +22,7 @@ def getMaxStreaks(toss):
     heads = 0
     n = 0
     for n in range(len(toss)):
-        print(heads)
-        print(tails)
+
         if n == 0:
             if toss[n] == 'Heads':
                 heads +=1
@@ -44,7 +43,8 @@ def getMaxStreaks(toss):
             else:
                 tails = 0
                 heads = 1
-    ans = max_heads, max_tails
+
+    ans = [max_heads, max_tails]
     return ans
 
 if __name__ == '__main__':
