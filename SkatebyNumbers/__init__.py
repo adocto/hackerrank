@@ -1,10 +1,10 @@
 if __name__ == "__main__":
     speed = 1
     N = input()
-    h = input()
-    heights = map(int,h.split())
+    heights = []
+    heights.append(input())
     x = 0
-    for x in range(1,N-1):
+    for x in range(0,N-1):
         if x == 0:
             speed = 1
         else:
