@@ -8,27 +8,30 @@ import sys
 
 # Complete the repeatedString function below.
 def repeatedString(s, n):
-    #While i <=n
     i = 0
     j = 0
     result = 0
     if 'a' in s:
         if len(s) == 1:
             result = n
-        else:
+        elif len(s) < n:
+            multiplier = n // len(s)
+            runoff = n % len(s)
             j = 0
-            while i < n:
-                # if s[j] == a, result ++
-                if s[j] == 'a':
+            while i < len(s):
+                if s[i] == 'a':
                     result += 1
-                #i++,
-                i += 1
-                #   if j < lens -1 j++
-                if j < len(s)-1:
-                    j+=1
-                #   else j = 0
-                else:
-                    j = 0
+                i+=1
+            result = result * multiplier
+            while j < runoff:
+                if s[j] == 'a':
+                    result +=1
+                j+=1
+        else:
+            while i < n:
+                if s[i] == 'a':
+                    result +=1
+                i+=1
     return result
 
 # def checkOnlyA(s):
