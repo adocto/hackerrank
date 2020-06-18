@@ -12,38 +12,25 @@ def sherlockAndAnagrams(s):
     result = 0
     memo = {}
 
-    def checkMatch(sub,sub2):
-        SubString1 = ''.join(sorted(sub))
-        SubString2 = ''.join(sorted(sub2))
-        if SubString1 == SubString2:
-            return 1
-        else:
-            return 0
-
     while offset <= len(s):
         L = 0
         R = L + offset
 
         while R <= len(s):
-            L2 = L + 1
-            R2 = L2 + offset
-            # anagram = ''.join(sorted(s[L:R]))
-            # if anagram in memo:
-            #     result += 1
-            # else:
-            #     memo[anagram] = 1
-            while R2 <= len(s):
-                anagram = checkMatch(s[L:R],s[L2:R2])
-                result += anagram
-                R2 +=1
-                L2 +=1
+            anagram = ''.join(sorted(s[L:R]))
+            if anagram in memo:
+                memo[anagram] += 1
+            else:
+                memo[anagram] = 1
             R += 1
             L += 1
+
         offset += 1
-    return result
 
-
-
+    for i in memo:
+        if memo[i] > 1:
+            result += (memo[i])*(memo[i]-1)/2
+    return int(result)
 
 
 if __name__ == '__main__':
